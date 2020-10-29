@@ -1,0 +1,22 @@
+apiVersion: afscsi.openafs.org/v1
+kind: OpenafsCSIApp
+metadata:
+  name: openafs-csi-driver
+spec:
+  # Add fields here
+  provisionerSpec:
+    provisionerName: openafs-csi-provisioner
+    provisionerNameSpace: <NAMESPACE>
+    provisionerImageName: quay.io/k8scsi/csi-provisioner:v1.6.0
+  attacherSpec:
+    attacherName: openafs-csi-attacher
+    attacherNameSpace: <NAMESPACE>
+    attacherImageName: quay.io/k8scsi/csi-attacher:v2.2.0
+  pluginSpec:
+    pluginName: openafs-csi-node
+    pluginNameSpace: <NAMESPACE>
+    driverRegistrarImage: quay.io/k8scsi/csi-node-driver-registrar:v1.3.0
+    pluginImage: openafscsiplugin:latest
+    livenessProbeImage: quay.io/k8scsi/livenessprobe:v1.1.0
+    afsMount: /afs
+    configmap: afsconfig

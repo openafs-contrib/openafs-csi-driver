@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: openafs-csi-operator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: openafs-csi-operator
+  template:
+    metadata:
+      labels:
+        name: openafs-csi-operator
+    spec:
+      serviceAccountName: openafs-csi-operator
+      containers:
+        - name: openafs-csi-operator
+          # Replace this with the built image name
+          image: openafsoperator:latest
+          command:
+          - openafs-csi-operator
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: WATCH_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: OPERATOR_NAME
+              value: "openafs-csi-operator"

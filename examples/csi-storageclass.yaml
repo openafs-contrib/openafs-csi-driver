@@ -1,0 +1,16 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: openafs-csi-sc
+provisioner: afscsi.openafs.org
+reclaimPolicy: Delete
+volumeBindingMode: Immediate
+parameters:
+  cellname: punetest.in.ibm.com #Mandatory param
+  server: 9.182.193.46 #Mandatory
+  partition: b  #Mandatory
+  volumepath: "/afs/pn/GlobalCSIMnt"  #Mandatory
+#  acl: "acl for new volume like system:anyuser rl> #Optional
+  csi.storage.k8s.io/provisioner-secret-name: afs-prov-secret
+#<Secret Name, This secret should contain base64 encode cell username and password for getting tokens. Mainly we need admin access to cell where volume will be created and we need write access to mount location>
+  csi.storage.k8s.io/provisioner-secret-namespace: default
