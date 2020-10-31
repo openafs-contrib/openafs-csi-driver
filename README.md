@@ -277,6 +277,6 @@ There are two types of storage provisionings-
 
     **Using PersistentVolumeClaim Inside POD:**
 
-    There are sample for POD using PersistentVolumeClaim inside Sample/csi-app.yaml. Do note CSI Plugin will mount a volume inside a POD, but to access a volume Container Application need to get tokens, which has to be done by the Application. We can use sample sidecar container to fetch UID based tokens for a POD, kindly refer https://github.com/openafs-contrib/openafs-csi-driver/blob/master/sidecar-for-tokens/README.md
+    There are sample for POD using PersistentVolumeClaim inside Sample/csi-app.yaml. Do note CSI Plugin will mount a volume inside a POD, but to access a volume Container Application need to get tokens, which has to be done by the Application. We can use sample sidecar container to fetch UID based tokens for a POD, kindly refer [sidecar-for-tokens](https://github.com/openafs-contrib/openafs-csi-driver/tree/master/sidecar-for-tokens)
 
 
