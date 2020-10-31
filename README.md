@@ -273,10 +273,10 @@ There are two types of storage provisionings-
 
     With above steps "openafs-static-pv" PersistentVolume should get created. Now we can create a PersistentVolumeClaim to bound to above PersistentVolume and later we can use PersistentVolumeClaim inside a POD.
 
-    For sample refer Sample/static-pv.yml, Sample/static-pvc.yml
+    For sample refer examples/static-pv.yml, examples/static-pvc.yml
 
     **Using PersistentVolumeClaim Inside POD:**
 
-    There are sample for POD using PersistentVolumeClaim inside Sample/csi-app.yaml. Do note CSI Plugin will mount a volume inside a POD, but to access a volume Container Application need to get tokens, which has to be done by the Application. We can use sample sidecar container to fetch UID based tokens for a POD, kindly refer [sidecar-for-tokens](https://github.com/openafs-contrib/openafs-csi-driver/tree/master/sidecar-for-tokens)
+    There are sample for POD yaml using PersistentVolumeClaim, inside examples/csi-app.yaml, examples/csi-app-staticPv.yml. Do note CSI Plugin will mount a volume inside a POD, but to access a volume Container Application need to get tokens, which has to be done by the Application. We can use sample sidecar container to fetch UID based tokens for a POD, kindly refer [sidecar-for-tokens](https://github.com/openafs-contrib/openafs-csi-driver/tree/master/sidecar-for-tokens)
 
 
