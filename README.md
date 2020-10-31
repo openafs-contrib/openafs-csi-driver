@@ -168,7 +168,7 @@ currently we have tested driver on x86_64
 ### E. OpenAFS storage provisioning using OpenAFS CSI Driver 
 There are two types of storage provisionings-
 - **Dynamic Provisioning**
-    > Dynamic provisioning is used to dynamically provisionthe storage backend volume based on the storageClass.
+    > Dynamic provisioning is used to dynamically provision the storage backend volume based on the storageClass.
 
     Let's create secret and storageclass,
     
@@ -277,6 +277,6 @@ There are two types of storage provisionings-
 
     **Using PersistentVolumeClaim Inside POD:**
 
-    There are sample for POD using PersistentVolumeClaim inside Sample/csi-app.yaml. Do note CSI Plugin will mount a volume inside a POD, but to access a volume Container Application need to get tokens, which has to be done by the Application.
+    There are sample for POD using PersistentVolumeClaim inside Sample/csi-app.yaml. Do note CSI Plugin will mount a volume inside a POD, but to access a volume Container Application need to get tokens, which has to be done by the Application. We can use sample sidecar container to fetch UID based tokens for a POD, kindly refer https://github.com/openafs-contrib/openafs-csi-driver/blob/master/sidecar-for-tokens/README.md
 
 
