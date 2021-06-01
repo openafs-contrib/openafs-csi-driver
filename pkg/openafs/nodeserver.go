@@ -24,6 +24,7 @@ package openafs
 import (
 	"fmt"
 	"strings"
+	"os"
 
 	"github.com/golang/glog"
 	"golang.org/x/net/context"
@@ -74,6 +75,13 @@ func (ns *nodeServer) NodePublishVolume(ctx context.Context, req *csi.NodePublis
 		mntPath = volIdd
 	}
 
+        if _, err := os.Lstat(targetPath); os.IsNotExist(err) {
+		err := os.MkdirAll(targetPath, 0755)
+		if err != nil {
+			return nil, status.Errorf(codes.Internal, "Unable to create taget path %v err:%v", targetPath, err)
+		}
+	}
+
         out, err := executor.Command("/bin/mount", "-o", "bind", mntPath, targetPath).CombinedOutput()
         if err != nil {
 	   glog.Infof("Failed to mount %v:%v", mntPath, targetPath)
@@ -101,6 +109,13 @@ func (ns *nodeServer) NodeUnpublishVolume(ctx context.Context, req *csi.NodeUnpu
         if err != nil {
            return &csi.NodeUnpublishVolumeResponse{}, fmt.Errorf("failed to remove dir%v, %v", err, string(out))
         }
+
+	if _, err := os.Lstat(targetPath); !os.IsNotExist(err) {
+		err = os.Remove(targetPath)
+		if err != nil {
+			return &csi.NodeUnpublishVolumeResponse{}, fmt.Errorf("Failed to remove dir %v err %v",targetPath, err)
+		}
+	}
 
 	return &csi.NodeUnpublishVolumeResponse{}, nil
 }
