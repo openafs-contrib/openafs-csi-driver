@@ -26,7 +26,7 @@ needing provisioned storage.
 -   Supported Container Orchastrators (CO)
     ```sh
     Kubernetes >= 1.18
-    OpenShift = 4.3  
+    OpenShift 4.7  
     ```
 currently we have tested driver on x86_64 
 
